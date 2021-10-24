@@ -26,9 +26,9 @@ struct Quad {
 
 void drawStruct(struct Quad item) {
     if (item.donebefore == 0) {
-        floatbuffer(GL_ARRAY_BUFFER, 1, &item.buffer, &item.positions, sizeof(item.positions));
-        unsignedintbuffer(GL_ELEMENT_ARRAY_BUFFER, 1, &item.ibo, &item.indices, sizeof(item.indices));
-        floatbuffer(GL_ARRAY_BUFFER, 1, &item.texb, &item.texcoords, sizeof(item.texcoords));
+        floatbuffer(GL_ARRAY_BUFFER, 1, &item.buffer, item.positions, sizeof(item.positions));
+        unsignedintbuffer(GL_ELEMENT_ARRAY_BUFFER, 1, &item.ibo, item.indices, sizeof(item.indices));
+        floatbuffer(GL_ARRAY_BUFFER, 1, &item.texb, item.texcoords, sizeof(item.texcoords));
 
         vertexarray(1, &item.vao);
         glEnableVertexAttribArray(0);

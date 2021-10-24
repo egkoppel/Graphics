@@ -41,20 +41,29 @@ int main(void) {
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_BLEND);
-    
+    glClearColor(0.0f, 0.3f, 0.2f, 0.0f);
+
     struct Quad rect;
     rect.vshader = texturevertex;
     rect.fshader = texturefragment;
     rect.texturepath = "../textures/mii_face_512x512.png";
     rect.slot = 0;
     rect.donebefore = 0;
-
+    /*
     memcpy(positions, rect.positions, sizeof(positions));
     memcpy(texcoords, rect.texcoords, sizeof(texcoords));
     memcpy(indices, rect.indices, sizeof(indices));
+    */
+    for (int i = 0; i < 16; i++) {
+        rect.positions[i] = positions[i];
+    }
+    for (int i = 0; i < 8; i++) {
+        rect.texcoords[i] = texcoords[i];
+    }
+    for (int i = 0; i < 6; i++) {
+        rect.indices[i] = indices[i];
+    }
 
-    glClearColor(0.0f, 0.3f, 0.2f, 0.0f);
-    //Loop until the user closes the window
     while (!glfwWindowShouldClose(window)) {
         //Render here
         drawStruct(rect);
