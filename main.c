@@ -10,7 +10,7 @@
 #include "include/shader.c"
 #include "include/texture.c"
 #include "include/draw.c"
-#include "include/shaderstore.txt"
+#include "shaders/shaderstore.txt"
 
 int main(void) {
 
