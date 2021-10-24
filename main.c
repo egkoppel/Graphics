@@ -4,7 +4,6 @@
 #include <GLFW/glfw3.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include "include/startup.c"
 #include "include/buffer.c"
 #include "include/shader.c"
@@ -49,11 +48,7 @@ int main(void) {
     rect.texturepath = "../textures/mii_face_512x512.png";
     rect.slot = 0;
     rect.donebefore = 0;
-    /*
-    memcpy(positions, rect.positions, sizeof(positions));
-    memcpy(texcoords, rect.texcoords, sizeof(texcoords));
-    memcpy(indices, rect.indices, sizeof(indices));
-    */
+    
     for (int i = 0; i < 16; i++) {
         rect.positions[i] = positions[i];
     }
