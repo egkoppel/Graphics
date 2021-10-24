@@ -8,9 +8,9 @@ void draw(unsigned int shader, unsigned int vao, unsigned int ibo, GLenum mode, 
 }
 
 struct Quad {
-    float positions[16];       //16 component array
-    float texcoords[8];        //8 component array
-    unsigned int indices[6];   //6 component array
+    float positions[16];
+    float texcoords[8];
+    unsigned int indices[6];
     unsigned int buffer;
     unsigned int texb;
     unsigned int ibo;

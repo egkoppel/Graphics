@@ -13,9 +13,9 @@
 
 int main(void) {
 
-    GLFWwindow* window = startup(600, 600, "Graphics with OpenGL and GLFW", NULL, NULL, 1);
+    GLFWwindow* window = startup(600, 600, "Graphics with OpenGL and GLFW", NULL, NULL, 1, 0.0f, 0.3f, 0.2f, 0.0f);
     if (window == NULL) {
-        printf("Startup Error\n");
+        printf("Window Startup Error\n");
         return -1;
     }
     
@@ -37,10 +37,6 @@ int main(void) {
         0, 1, 2,
         2, 3, 0
     };
-
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glEnable(GL_BLEND);
-    glClearColor(0.0f, 0.3f, 0.2f, 0.0f);
 
     struct Quad rect;
     rect.vshader = texturevertex;
