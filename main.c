@@ -1,4 +1,5 @@
 #define STB_IMAGE_IMPLEMENTATION
+#define _CRT_SECURE_NO_WARNINGS
 #include <std_image.h>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -9,7 +10,6 @@
 #include "include/shader.c"
 #include "include/texture.c"
 #include "include/draw.c"
-#include "shaders/shaderstore.txt"
 
 int main(void) {
 
@@ -39,8 +39,8 @@ int main(void) {
     };
 
     struct Quad rect;
-    rect.vshader = texturevertex;
-    rect.fshader = texturefragment;
+    rect.vshader = "../shaders/texturevertex.glsl";
+    rect.fshader = "../shaders/texturefragment.glsl";
     rect.texturepath = "../textures/mii_face_512x512.png";
     rect.slot = 0;
     rect.donebefore = 0;
@@ -56,13 +56,12 @@ int main(void) {
     }
 
     while (!glfwWindowShouldClose(window)) {
-        //Render here
-        drawStruct(rect);
+        drawStruct(&rect);
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
 
-    //deleteshader(rect.texshader);
+    deleteshader(rect.texshader);
     deletetexture(&rect.texture);
     glfwTerminate();
     return 0;

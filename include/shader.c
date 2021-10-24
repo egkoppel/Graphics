@@ -17,10 +17,30 @@ static unsigned int compileshader(const char* source, unsigned int type) {
     return id;
 }
 
+const char* parseshader(const char* filepath) {
+    FILE* fp;
+    fp = fopen(filepath, "rb");
+    if (fp != NULL) {
+        fseek(fp, 0, SEEK_END);
+        int length = ftell(fp);
+        fseek(fp, 0, SEEK_SET);
+        const char* shadercode = malloc(length * sizeof(char));
+        for (int i = 0; i < length; i++) {
+            fread(&shadercode[i], 1, 1, fp);
+        }
+        fclose(fp);
+        return(shadercode);
+    }
+    else {
+        printf("Shader file %s could not be found/opened.", filepath);
+        return NULL;
+    }
+}
+
 static unsigned int createshader(const char* VertexShader, const char* FragmentShader) {
     unsigned int program = glCreateProgram();
-    unsigned int vertexshader = compileshader(VertexShader, GL_VERTEX_SHADER);
-    unsigned int fragmentshader = compileshader(FragmentShader, GL_FRAGMENT_SHADER);
+    unsigned int vertexshader = compileshader(parseshader(VertexShader), GL_VERTEX_SHADER);
+    unsigned int fragmentshader = compileshader(parseshader(FragmentShader), GL_FRAGMENT_SHADER);
     glAttachShader(program, vertexshader);
     glAttachShader(program, fragmentshader);
     glLinkProgram(program);
@@ -50,7 +70,7 @@ GLint getuniformlocation(GLuint program, const char *uniformname) {
     return location;
 }
 
-//WARNING: Other versions of the following function will need to be created for uniforms of different types, such as 1 float, matrices, etc.
+//WARNING: Other versions of the following functions will need to be created for uniforms of different types, such as 1 float, matrices, etc.
 void setuniform4f(unsigned int shader, const char *uniformname, float v0, float v1, float v2, float v3) {
     glUniform4f(getuniformlocation(shader, uniformname), v0, v1, v2, v3);
 }
