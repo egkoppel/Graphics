@@ -53,5 +53,5 @@ void drawStruct(struct Quad* item) {
     bindshader(item->texshader);
     glBindVertexArray(item->vao);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, item->ibo);
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, NULL);
+    glDrawElements(GL_TRIANGLES, ( sizeof(item->indices) / sizeof(item->indices[0]) ), GL_UNSIGNED_INT, NULL);
 }
