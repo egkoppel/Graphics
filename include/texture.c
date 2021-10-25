@@ -2,6 +2,10 @@ void maketexture(const char* imagefile, unsigned int *texture) {
 	int width, height, bpp;
 	stbi_set_flip_vertically_on_load(1);
 	unsigned char* localbuffer = stbi_load(imagefile, &width, &height, &bpp, 4);
+	if(!localbuffer){
+		printf("Image file %s could not be found/opened", imagefile);
+		return NULL;
+	}
 	glGenTextures(1, texture);
 	glBindTexture(GL_TEXTURE_2D, *texture);
 

@@ -44,7 +44,7 @@ void drawStruct(struct Quad* item) {
         maketexture(item->texturepath, &item->texture);
 
         bindtexture(item->slot, item->texture);
-        setuniform1i(item->texshader, "u_texture", 0);
+        setuniform1i(item->texshader, "u_texture", item->slot);
 
         item->donebefore++;
     }
@@ -54,4 +54,11 @@ void drawStruct(struct Quad* item) {
     glBindVertexArray(item->vao);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, item->ibo);
     glDrawElements(GL_TRIANGLES, ( sizeof(item->indices) / sizeof(item->indices[0]) ), GL_UNSIGNED_INT, NULL);
+}
+
+void drawStructArray(struct Quad items[], unsigned int length) {
+    //int length = sizeof(items) / sizeof(items[0]);
+    for (int i = 0; i < length; i++) {
+        drawStruct(&items[i]);
+    }
 }

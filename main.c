@@ -44,19 +44,31 @@ int main(void) {
     rect.texturepath = "../textures/mii_face_512x512.png";
     rect.slot = 0;
     rect.donebefore = 0;
+
+    struct Quad wall;
+    wall.vshader = "../shaders/texturevertex.glsl";
+    wall.fshader = "../shaders/texturefragment.glsl";
+    wall.texturepath = "../textures/cobble_stone.png";
+    wall.slot = 1;
+    wall.donebefore = 0;
     
     for (int i = 0; i < 16; i++) {
         rect.positions[i] = positions[i];
+        wall.positions[i] = positions[i];
     }
     for (int i = 0; i < 8; i++) {
         rect.texcoords[i] = texcoords[i];
+        wall.texcoords[i] = texcoords[i];
     }
     for (int i = 0; i < 6; i++) {
         rect.indices[i] = indices[i];
+        wall.indices[i] = indices[i];
     }
 
+    struct Quad stuff[] = { wall, rect};
+
     while (!glfwWindowShouldClose(window)) {
-        drawStruct(&rect);
+        drawStructArray(stuff, (sizeof(stuff)/sizeof(stuff[0])));
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
