@@ -1,5 +1,6 @@
 # Graphics
-My attempt at OpenGL graphics
+My attempt at OpenGL graphics.
+
 I have no idea what this will end up as, but it's a bit of fun and something to do.
 
 Previous goals include:
