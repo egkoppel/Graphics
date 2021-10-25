@@ -24,9 +24,12 @@ const char* parseshader(const char* filepath) {
         fseek(fp, 0, SEEK_END);
         int length = ftell(fp);
         fseek(fp, 0, SEEK_SET);
-        const char* shadercode = malloc(length * sizeof(char));
+        char* shadercode = malloc((length + 1) * sizeof(char));
+        shadercode[length] = '\0';
+        unsigned char store;
         for (int i = 0; i < length; i++) {
-            fread(&shadercode[i], 1, 1, fp);
+            fread(&store, 1, 1, fp);
+            shadercode[i] = store;
         }
         fclose(fp);
         return(shadercode);
