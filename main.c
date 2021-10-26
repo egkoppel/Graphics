@@ -61,8 +61,8 @@ int main(void) {
     wall.texture_wrap_t = GL_REPEAT;
     
     for (int i = 0; i < 16; i++) {
-        face.positions[i] = positions[i] * 0.5f;
-        wall.positions[i] = positions[i] * 0.5f;
+        face.positions[i] = positions[i];
+        wall.positions[i] = positions[i];
     }
     for (int i = 0; i < 8; i++) {
         face.texcoords[i] = texcoords[i];

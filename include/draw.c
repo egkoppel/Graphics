@@ -47,13 +47,12 @@ void drawStruct(struct TextureQuad* item) {
 
         maketexture(item->texturepath, &item->texture, item->texture_mag_filter, item->texture_min_filter, item->texture_wrap_s, item->texture_wrap_t);
 
-        bindtexture(item->slot, item->texture);
-        setuniform1i(item->texshader, "u_texture", item->slot);
-
         item->donebefore++;
     }
     
     bindshader(item->texshader);
+    bindtexture(item->slot, item->texture);
+    setuniform1i(item->texshader, "u_texture", item->slot);
     glBindVertexArray(item->vao);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, item->ibo);
     glDrawElements(GL_TRIANGLES, ( sizeof(item->indices) / sizeof(item->indices[0]) ), GL_UNSIGNED_INT, NULL);
