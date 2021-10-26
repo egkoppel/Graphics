@@ -38,7 +38,7 @@ int main(void) {
         2, 3, 0
     };
 
-    struct Quad face;
+    struct TextureQuad face;
     face.vshader = "../shaders/texturevertex.glsl";
     face.fshader = "../shaders/texturefragment.glsl";
     face.texturepath = "../textures/mii_face_512x512.png";
@@ -49,7 +49,7 @@ int main(void) {
     face.texture_wrap_s = GL_REPEAT;
     face.texture_wrap_t = GL_REPEAT;
 
-    struct Quad wall;
+    struct TextureQuad wall;
     wall.vshader = "../shaders/texturevertex.glsl";
     wall.fshader = "../shaders/texturefragment.glsl";
     wall.texturepath = "../textures/cobble_stone.png";
@@ -73,7 +73,7 @@ int main(void) {
         wall.indices[i] = indices[i];
     }
 
-    struct Quad stuff[] = { wall, face };
+    struct TextureQuad stuff[] = { wall, face };
 
     while (!glfwWindowShouldClose(window)) {
         drawStructArray(stuff, (sizeof(stuff)/sizeof(stuff[0])));

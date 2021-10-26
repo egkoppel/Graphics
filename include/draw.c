@@ -7,7 +7,7 @@ void draw(unsigned int shader, unsigned int vao, unsigned int ibo, GLenum mode, 
     //Since everything gets bound at the start again, there's little point unbinding stuff
 }
 
-struct Quad {
+struct TextureQuad {
     float positions[16];
     float texcoords[8];
     unsigned int indices[6];
@@ -28,7 +28,7 @@ struct Quad {
     unsigned short int donebefore;
 };
 
-void drawStruct(struct Quad* item) {
+void drawStruct(struct TextureQuad* item) {
     if (item->donebefore == 0) {
         floatbuffer(GL_ARRAY_BUFFER, 1, &item->buffer, item->positions, sizeof(item->positions));
         unsignedintbuffer(GL_ELEMENT_ARRAY_BUFFER, 1, &item->ibo, item->indices, sizeof(item->indices));
@@ -59,13 +59,13 @@ void drawStruct(struct Quad* item) {
     glDrawElements(GL_TRIANGLES, ( sizeof(item->indices) / sizeof(item->indices[0]) ), GL_UNSIGNED_INT, NULL);
 }
 
-void drawStructArray(struct Quad items[], unsigned int length) {
+void drawStructArray(struct TextureQuad items[], unsigned int length) {
     for (int i = 0; i < length; i++) {
         drawStruct(&items[i]);
     }
 }
 
-void deleteshadertexture(struct Quad items[], unsigned int length) {
+void deleteshadertexture(struct TextureQuad items[], unsigned int length) {
     for (int i = 0; i < length; i++) {
         deleteshader(&items[i].texshader);
         deletetexture(&items[i].texture);
