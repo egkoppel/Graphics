@@ -21,6 +21,10 @@ struct Quad {
     unsigned int texture;
     unsigned int texshader;
     const char* texturepath;
+    GLint texture_min_filter;
+    GLint texture_mag_filter;
+    GLint texture_wrap_s;
+    GLint texture_wrap_t;
     unsigned short int donebefore;
 };
 
@@ -41,7 +45,7 @@ void drawStruct(struct Quad* item) {
         item->texshader = createshader(item->vshader, item->fshader);
         bindshader(item->texshader);
 
-        maketexture(item->texturepath, &item->texture);
+        maketexture(item->texturepath, &item->texture, item->texture_mag_filter, item->texture_min_filter, item->texture_wrap_s, item->texture_wrap_t);
 
         bindtexture(item->slot, item->texture);
         setuniform1i(item->texshader, "u_texture", item->slot);
@@ -49,7 +53,6 @@ void drawStruct(struct Quad* item) {
         item->donebefore++;
     }
     
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     bindshader(item->texshader);
     glBindVertexArray(item->vao);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, item->ibo);
@@ -57,8 +60,14 @@ void drawStruct(struct Quad* item) {
 }
 
 void drawStructArray(struct Quad items[], unsigned int length) {
-    //int length = sizeof(items) / sizeof(items[0]);
     for (int i = 0; i < length; i++) {
         drawStruct(&items[i]);
+    }
+}
+
+void deleteshadertexture(struct Quad items[], unsigned int length) {
+    for (int i = 0; i < length; i++) {
+        deleteshader(&items[i].texshader);
+        deletetexture(&items[i].texture);
     }
 }

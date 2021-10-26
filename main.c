@@ -38,43 +38,53 @@ int main(void) {
         2, 3, 0
     };
 
-    struct Quad rect;
-    rect.vshader = "../shaders/texturevertex.glsl";
-    rect.fshader = "../shaders/texturefragment.glsl";
-    rect.texturepath = "../textures/mii_face_512x512.png";
-    rect.slot = 0;
-    rect.donebefore = 0;
+    struct Quad face;
+    face.vshader = "../shaders/texturevertex.glsl";
+    face.fshader = "../shaders/texturefragment.glsl";
+    face.texturepath = "../textures/mii_face_512x512.png";
+    face.slot = 1;
+    face.donebefore = 0;
+    face.texture_mag_filter = GL_NEAREST;
+    face.texture_min_filter = GL_NEAREST;
+    face.texture_wrap_s = GL_REPEAT;
+    face.texture_wrap_t = GL_REPEAT;
 
     struct Quad wall;
     wall.vshader = "../shaders/texturevertex.glsl";
     wall.fshader = "../shaders/texturefragment.glsl";
     wall.texturepath = "../textures/cobble_stone.png";
-    wall.slot = 1;
+    wall.slot = 0;
     wall.donebefore = 0;
+    wall.texture_mag_filter = GL_LINEAR;
+    wall.texture_min_filter = GL_LINEAR;
+    wall.texture_wrap_s = GL_REPEAT;
+    wall.texture_wrap_t = GL_REPEAT;
     
     for (int i = 0; i < 16; i++) {
-        rect.positions[i] = positions[i];
+        face.positions[i] = positions[i];
         wall.positions[i] = positions[i];
     }
     for (int i = 0; i < 8; i++) {
-        rect.texcoords[i] = texcoords[i];
+        face.texcoords[i] = texcoords[i];
         wall.texcoords[i] = texcoords[i];
     }
     for (int i = 0; i < 6; i++) {
-        rect.indices[i] = indices[i];
+        face.indices[i] = indices[i];
         wall.indices[i] = indices[i];
     }
 
-    struct Quad stuff[] = { wall, rect};
+    struct Quad stuff[] = { wall, face };
 
     while (!glfwWindowShouldClose(window)) {
         drawStructArray(stuff, (sizeof(stuff)/sizeof(stuff[0])));
         glfwSwapBuffers(window);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glfwPollEvents();
     }
 
-    deleteshader(rect.texshader);
-    deletetexture(&rect.texture);
+    deleteshader(face.texshader);
+    deletetexture(&face.texture);
+    //deleteshadertexture(stuff, (sizeof(stuff) / sizeof(stuff[0])));
     glfwTerminate();
     return 0;
 }
