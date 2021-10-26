@@ -60,14 +60,14 @@ void drawStruct(struct TextureQuad* item) {
 }
 
 void drawStructArray(struct TextureQuad items[], unsigned int length) {
-    for (int i = 0; i < length; i++) {
+    for (unsigned int i = 0; i < length; i++) {
         drawStruct(&items[i]);
     }
 }
 
 void deleteshadertexture(struct TextureQuad items[], unsigned int length) {
-    for (int i = 0; i < length; i++) {
-        deleteshader(&items[i].texshader);
+    for (unsigned int i = 0; i < length; i++) {
+        deleteshader(items[i].texshader);
         deletetexture(&items[i].texture);
     }
 }

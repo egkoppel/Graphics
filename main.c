@@ -62,7 +62,7 @@ int main(void) {
     
     for (int i = 0; i < 16; i++) {
         face.positions[i] = positions[i];
-        wall.positions[i] = positions[i];
+        wall.positions[i] = positions[i] * 0.5f;
     }
     for (int i = 0; i < 8; i++) {
         face.texcoords[i] = texcoords[i];
@@ -73,18 +73,16 @@ int main(void) {
         wall.indices[i] = indices[i];
     }
 
-    struct TextureQuad stuff[] = { wall, face };
+    struct TextureQuad stuff[] = {wall, face};
 
     while (!glfwWindowShouldClose(window)) {
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         drawStructArray(stuff, (sizeof(stuff)/sizeof(stuff[0])));
         glfwSwapBuffers(window);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glfwPollEvents();
     }
 
-    deleteshader(face.texshader);
-    deletetexture(&face.texture);
-    //deleteshadertexture(stuff, (sizeof(stuff) / sizeof(stuff[0])));
+    deleteshadertexture(stuff, (sizeof(stuff) / sizeof(stuff[0])));
     glfwTerminate();
     return 0;
 }

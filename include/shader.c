@@ -25,14 +25,22 @@ const char* parseshader(const char* filepath) {
         int length = ftell(fp);
         fseek(fp, 0, SEEK_SET);
         char* shadercode = malloc((length + 1) * sizeof(char));
-        shadercode[length] = '\0';
-        unsigned char store;
-        for (int i = 0; i < length; i++) {
-            fread(&store, 1, 1, fp);
-            shadercode[i] = store;
+        if (shadercode) {
+            shadercode[length] = '\0';
+
+            unsigned char store;
+            for (int i = 0; i < length; i++) {
+                fread(&store, 1, 1, fp);
+                shadercode[i] = store;
+            }
+
+            fclose(fp);
+            return(shadercode);
         }
-        fclose(fp);
-        return(shadercode);
+        else {
+            printf("const char* array shadercode could not be allocated memory, and was a NULL pointer.\n");
+            return(NULL);
+        }
     }
     else {
         printf("Shader file %s could not be found/opened.", filepath);
