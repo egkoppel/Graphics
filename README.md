@@ -3,7 +3,7 @@ My attempt at OpenGL graphics.
 
 I have no idea what this will end up as, but it's a bit of fun and something to do.
 
-Also, the added requirement that it must all be in C, with no C++ code. Partly because that would be cheating, but also because keeping it in C makes it compatiable with both C and C++ projects.
+Formerly subject to a C-only requirement (without C++) until I decided that was simply too hard. It was the glm library that finally broke my resolve.
 
 Previous goals include:
 
