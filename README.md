@@ -11,10 +11,14 @@ Previous goals include:
 
   -To make an array of the structures and a function that takes this array and draws all of them in one go.
 
+  -To have an imgui implementation.
 
-The next goal is to prevent structs from overwriting each other when drawn. Currently, the new image of the second struct overwrites the previous image, instead of being drawn/superimposed over it.
+  -To do that thing with the colours on the corners of objects that makes it look trippy.
 
 
+Future goals:
+
+  -There is a projection matrix - the next step is to enter the third dimension (putting it like that makes it sound significantly more dramatic than it actually is).
 
 Apparently including \*.c files instead of \*.h files is not good.
 But it works, so it stays.

@@ -19,6 +19,9 @@
     <Filter Include="res\shaders">
       <UniqueIdentifier>{b2ca6c20-159d-40bb-b409-954d7448330c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\imgui">
+      <UniqueIdentifier>{443459c2-d0c0-4467-bdb1-a7823185961a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="basicpurple.shader">
@@ -26,8 +29,43 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.c">
+    <ClCompile Include="main.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="dependencies\IMGUI\imgui\imgui.cpp">
+      <Filter>src\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="dependencies\IMGUI\imgui\imgui_demo.cpp">
+      <Filter>src\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="dependencies\IMGUI\imgui\imgui_draw.cpp">
+      <Filter>src\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="dependencies\IMGUI\imgui\imgui_impl_glfw_gl3.cpp">
+      <Filter>src\imgui</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="dependencies\IMGUI\imgui\imconfig.h">
+      <Filter>src\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="dependencies\IMGUI\imgui\imgui.h">
+      <Filter>src\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="dependencies\IMGUI\imgui\imgui_impl_glfw_gl3.h">
+      <Filter>src\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="dependencies\IMGUI\imgui\imgui_internal.h">
+      <Filter>src\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="dependencies\IMGUI\imgui\stb_rect_pack.h">
+      <Filter>src\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="dependencies\IMGUI\imgui\stb_textedit.h">
+      <Filter>src\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="dependencies\IMGUI\imgui\stb_truetype.h">
+      <Filter>src\imgui</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -19,10 +19,23 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.c" />
+    <ClCompile Include="dependencies\IMGUI\imgui\imgui.cpp" />
+    <ClCompile Include="dependencies\IMGUI\imgui\imgui_demo.cpp" />
+    <ClCompile Include="dependencies\IMGUI\imgui\imgui_draw.cpp" />
+    <ClCompile Include="dependencies\IMGUI\imgui\imgui_impl_glfw_gl3.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="basicpurple.shader" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="dependencies\IMGUI\imgui\imconfig.h" />
+    <ClInclude Include="dependencies\IMGUI\imgui\imgui.h" />
+    <ClInclude Include="dependencies\IMGUI\imgui\imgui_impl_glfw_gl3.h" />
+    <ClInclude Include="dependencies\IMGUI\imgui\imgui_internal.h" />
+    <ClInclude Include="dependencies\IMGUI\imgui\stb_rect_pack.h" />
+    <ClInclude Include="dependencies\IMGUI\imgui\stb_textedit.h" />
+    <ClInclude Include="dependencies\IMGUI\imgui\stb_truetype.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -95,7 +108,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(solutionDir)dependencies\GLEW\include;$(solutionDir)dependencies\GLFW\include;$(solutionDir)dependencies\STB\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(solutionDir)dependencies\GLEW\include;$(solutionDir)dependencies\GLFW\include;$(solutionDir)dependencies\STB\include;$(solutionDir)dependencies\GLM;$(solutionDir)dependencies\IMGUI;$(solutionDir)include\</AdditionalIncludeDirectories>
       <SuppressStartupBanner>false</SuppressStartupBanner>
     </ClCompile>
     <Link>
@@ -113,7 +126,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(solutionDir)dependencies\GLEW\include;$(solutionDir)dependencies\GLFW\include;$(solutionDir)dependencies\STB\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(solutionDir)dependencies\GLEW\include;$(solutionDir)dependencies\GLFW\include;$(solutionDir)dependencies\STB\include;$(solutionDir)dependencies\GLM;$(solutionDir)dependencies\IMGUI;$(solutionDir)include\</AdditionalIncludeDirectories>
       <SuppressStartupBanner>false</SuppressStartupBanner>
     </ClCompile>
     <Link>
@@ -131,7 +144,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(solutionDir)dependencies\GLEW\include;$(solutionDir)dependencies\GLFW\include;$(solutionDir)dependencies\STB\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(solutionDir)dependencies\GLEW\include;$(solutionDir)dependencies\GLFW\include;$(solutionDir)dependencies\STB\include;$(solutionDir)dependencies\GLM;$(solutionDir)dependencies\IMGUI;$(solutionDir)include\</AdditionalIncludeDirectories>
       <SuppressStartupBanner>false</SuppressStartupBanner>
     </ClCompile>
     <Link>
@@ -149,7 +162,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(solutionDir)dependencies\GLEW\include;$(solutionDir)dependencies\GLFW\include;$(solutionDir)dependencies\STB\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(solutionDir)dependencies\GLEW\include;$(solutionDir)dependencies\GLFW\include;$(solutionDir)dependencies\STB\include;$(solutionDir)dependencies\GLM;$(solutionDir)dependencies\IMGUI;$(solutionDir)include\</AdditionalIncludeDirectories>
       <SuppressStartupBanner>false</SuppressStartupBanner>
     </ClCompile>
     <Link>

@@ -8,39 +8,37 @@ void draw(unsigned int shader, unsigned int vao, unsigned int ibo, GLenum mode, 
 }
 
 struct TextureQuad {
-    float positions[16];
-    float texcoords[8];
+    float positions[28];
     unsigned int indices[6];
     unsigned int buffer;
-    unsigned int texb;
     unsigned int ibo;
     unsigned int vao;
     const char* vshader;
     const char* fshader;
     unsigned int slot;
-    unsigned int texture;
     unsigned int texshader;
     const char* texturepath;
     GLint texture_min_filter;
     GLint texture_mag_filter;
     GLint texture_wrap_s;
     GLint texture_wrap_t;
+    GLuint texture;
+    //unsigned int texture;
     unsigned short int donebefore;
 };
 
-void drawStruct(struct TextureQuad* item) {
+void drawStruct(struct TextureQuad* item, glm::mat4 proj) {
     if (item->donebefore == 0) {
         floatbuffer(GL_ARRAY_BUFFER, 1, &item->buffer, item->positions, sizeof(item->positions));
         unsignedintbuffer(GL_ELEMENT_ARRAY_BUFFER, 1, &item->ibo, item->indices, sizeof(item->indices));
-        floatbuffer(GL_ARRAY_BUFFER, 1, &item->texb, item->texcoords, sizeof(item->texcoords));
-
         vertexarray(1, &item->vao);
-        glEnableVertexAttribArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, item->buffer);
-        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 4, (const void*)0);
+        glEnableVertexAttribArray(0);
         glEnableVertexAttribArray(1);
-        glBindBuffer(GL_ARRAY_BUFFER, item->texb);
-        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, (const void*)0);
+        glEnableVertexAttribArray(2);
+        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 7, (const void*)(sizeof(float) * 0));
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 7, (const void*)(sizeof(float) * 2));
+        glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 7, (const void*)(sizeof(float) * 4));
 
         item->texshader = createshader(item->vshader, item->fshader);
         bindshader(item->texshader);
@@ -53,14 +51,15 @@ void drawStruct(struct TextureQuad* item) {
     bindshader(item->texshader);
     bindtexture(item->slot, item->texture);
     setuniform1i(item->texshader, "u_texture", item->slot);
+    setuniformmat4f(item->texshader, "u_MVP", proj);
     glBindVertexArray(item->vao);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, item->ibo);
     glDrawElements(GL_TRIANGLES, ( sizeof(item->indices) / sizeof(item->indices[0]) ), GL_UNSIGNED_INT, NULL);
 }
 
-void drawStructArray(struct TextureQuad items[], unsigned int length) {
+void drawStructArray(struct TextureQuad items[], unsigned int length, glm::mat4 proj) {
     for (unsigned int i = 0; i < length; i++) {
-        drawStruct(&items[i]);
+        drawStruct(&items[i], proj);
     }
 }
 

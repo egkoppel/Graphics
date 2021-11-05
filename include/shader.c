@@ -7,7 +7,7 @@ static unsigned int compileshader(const char* source, unsigned int type) {
     if (result == GL_FALSE) {
         int len;
         glGetShaderiv(id, GL_INFO_LOG_LENGTH, &len);
-        char* message = malloc(len * sizeof(char));
+        char* message = (char*)malloc(len * sizeof(char));
         glGetShaderInfoLog(id, len, &len, message);
         printf("Oh Dear! The shader failed to compile!\n");
         printf("%s\n", message);
@@ -24,7 +24,7 @@ const char* parseshader(const char* filepath) {
         fseek(fp, 0, SEEK_END);
         int length = ftell(fp);
         fseek(fp, 0, SEEK_SET);
-        char* shadercode = malloc((length + 1) * sizeof(char));
+        char* shadercode = (char*)malloc((length + 1) * sizeof(char));
         if (shadercode) {
             shadercode[length] = '\0';
 
@@ -88,4 +88,8 @@ void setuniform4f(unsigned int shader, const char *uniformname, float v0, float 
 
 void setuniform1i(unsigned int shader, const char* uniformname, int i0) {
     glUniform1i(getuniformlocation(shader, uniformname), i0);
+}
+
+void setuniformmat4f(unsigned int shader, const char* uniformname, glm::mat4& matrix) {
+    glUniformMatrix4fv(getuniformlocation(shader, uniformname), 1, GL_FALSE, &matrix[0][0]);
 }
