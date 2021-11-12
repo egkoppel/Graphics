@@ -23,6 +23,8 @@
 
 int main(void) {
 
+//#include "tardis.c"
+
     int width =  800;
     int height = 500;
 
@@ -31,20 +33,13 @@ int main(void) {
         printf("Window Startup Error\n");
         return -1;
     }
-    /*
+
     float positions[] = {
-        -1.0f, -1.0f, 0.0f, 0.0f, //0 
-         1.0f, -1.0f, 1.0f, 0.0f, //1
-         1.0f,  1.0f, 1.0f, 1.0f, //2
-        -1.0f,  1.0f, 0.0f, 1.0f  //3
-    };
-    */
-    float positions[] = {
-        //positions      //tex coord  //vertex colours
-        -150.0f, -150.0f,  0.0f, 0.0f,  1.0f, 0.0f, 0.0f,  //0 - Bottom-Left 
-         150.0f, -150.0f,  1.0f, 0.0f,  0.0f, 1.0f, 0.0f,  //1 - Bottom-Right
-         150.0f,  150.0f,  1.0f, 1.0f,  0.0f, 0.0f, 1.0f,  //2 - Top----Right
-        -150.0f,  150.0f,  0.0f, 1.0f,  1.0f, 1.0f, 0.0f   //3 - Top----Left
+         //positions       //tex coord   //vertex colours
+        -150.0f, -150.0f,  0.0f, 0.0f,   1.0f, 0.0f, 0.0f,  //0 - Bottom-Left 
+         150.0f, -150.0f,  1.0f, 0.0f,   0.0f, 1.0f, 0.0f,  //1 - Bottom-Right
+         150.0f,  150.0f,  1.0f, 1.0f,   0.0f, 0.0f, 1.0f,  //2 - Top----Right
+        -150.0f,  150.0f,  0.0f, 1.0f,   1.0f, 1.0f, 0.0f   //3 - Top----Left
     };
 
     unsigned int indices[] = {
@@ -134,7 +129,7 @@ int main(void) {
 
     ImGui_ImplGlfwGL3_Shutdown();
     ImGui::DestroyContext();
-    deleteshadertexture(stuff, (sizeof(stuff) / sizeof(stuff[0])));
+    //deleteshadertexture(stuff, (sizeof(stuff) / sizeof(stuff[0])));
     glfwTerminate();
     return 0;
 }
