@@ -8,7 +8,7 @@ void draw(unsigned int shader, unsigned int vao, unsigned int ibo, GLenum mode, 
 }
 
 struct TextureQuad {
-    float positions[28];
+    float positions[32];
     unsigned int indices[6];
     unsigned int buffer;
     unsigned int ibo;
@@ -27,6 +27,72 @@ struct TextureQuad {
     unsigned short int donebefore;
 };
 
+struct VertexColourModel {
+    float positions[54];
+    unsigned int indices[42];
+    unsigned int buffer;
+    unsigned int ibo;
+    unsigned int vao;
+    const char* vshader;
+    const char* fshader;
+    unsigned int shader;
+    unsigned short int donebefore;
+};
+
+struct BasicColourModel {
+    float positions[27];
+    unsigned int indices[42];
+    unsigned int buffer;
+    unsigned int ibo;
+    unsigned int vao;
+    const char* vshader;
+    const char* fshader;
+    unsigned int shader;
+    unsigned short int donebefore;
+};
+
+void drawBasicColourModel(struct BasicColourModel* item, glm::mat4 proj) {
+    if (item->donebefore == 0) {
+        floatbuffer(GL_ARRAY_BUFFER, 1, &item->buffer, item->positions, sizeof(item->positions));
+        unsignedintbuffer(GL_ELEMENT_ARRAY_BUFFER, 1, &item->ibo, item->indices, sizeof(item->indices));
+        vertexarray(1, &item->vao);
+        glBindBuffer(GL_ARRAY_BUFFER, item->buffer);
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, (const void*)(sizeof(float) * 0));
+        item->shader = createshader(item->vshader, item->fshader);
+        bindshader(item->shader);
+        item->donebefore++;
+    }
+
+    bindshader(item->shader);
+    setuniformmat4f(item->shader, "u_MVP", proj);
+    glBindVertexArray(item->vao);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, item->ibo);
+    glDrawElements(GL_TRIANGLES, (sizeof(item->indices) / sizeof(item->indices[0])), GL_UNSIGNED_INT, NULL);
+}
+
+void drawVertexColourModel(struct VertexColourModel* item, glm::mat4 proj) {
+    if (item->donebefore == 0) {
+        floatbuffer(GL_ARRAY_BUFFER, 1, &item->buffer, item->positions, sizeof(item->positions));
+        unsignedintbuffer(GL_ELEMENT_ARRAY_BUFFER, 1, &item->ibo, item->indices, sizeof(item->indices));
+        vertexarray(1, &item->vao);
+        glBindBuffer(GL_ARRAY_BUFFER, item->buffer);
+        glEnableVertexAttribArray(0);
+        glEnableVertexAttribArray(1);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 6, (const void*)(sizeof(float) * 0));
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 6, (const void*)(sizeof(float) * 3));
+        item->shader = createshader(item->vshader, item->fshader);
+        bindshader(item->shader);
+        item->donebefore++;
+    }
+
+    bindshader(item->shader);
+    setuniformmat4f(item->shader, "u_MVP", proj);
+    glBindVertexArray(item->vao);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, item->ibo);
+    glDrawElements(GL_TRIANGLES, (sizeof(item->indices) / sizeof(item->indices[0])), GL_UNSIGNED_INT, NULL);
+}
+
 void drawStruct(struct TextureQuad* item, glm::mat4 proj) {
     if (item->donebefore == 0) {
         floatbuffer(GL_ARRAY_BUFFER, 1, &item->buffer, item->positions, sizeof(item->positions));
@@ -36,9 +102,9 @@ void drawStruct(struct TextureQuad* item, glm::mat4 proj) {
         glEnableVertexAttribArray(0);
         glEnableVertexAttribArray(1);
         glEnableVertexAttribArray(2);
-        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 7, (const void*)(sizeof(float) * 0));
-        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 7, (const void*)(sizeof(float) * 2));
-        glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 7, (const void*)(sizeof(float) * 4));
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (const void*)(sizeof(float) * 0));
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (const void*)(sizeof(float) * 3));
+        glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (const void*)(sizeof(float) * 5));
 
         item->texshader = createshader(item->vshader, item->fshader);
         bindshader(item->texshader);

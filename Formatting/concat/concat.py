@@ -1,5 +1,5 @@
-filename = "basic_tardis"
-#filename = "TARDIS"
+#filename = "basic_tardis"
+filename = "TARDIS"
 ext = ".dae"
 oxt = ".txt"
 e = open("../" + filename + ext, "r")
@@ -31,13 +31,14 @@ for line in data:
         for j in range(len(numbers)):
             if count% 2 == 0:
                 f.write(str(round(float(numbers[j])*2.54)))
+                #f.write(str(float(numbers[j])*0.254))
             else:
                 g.write(str(round(float(numbers[j])*2.54)))
-            if j != len(numbers) - 1:
-                if count % 2 == 0:
-                    f.write(",")
-                else:
-                    g.write(",")
+                #g.write(str(float(numbers[j])*0.254))
+            if count % 2 == 0:
+                f.write(",")
+            else:
+                g.write(",")
             if j % 3 == 2:
                 if count % 2 == 0:
                     f.write("\n")
