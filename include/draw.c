@@ -51,6 +51,49 @@ struct BasicColourModel {
     unsigned short int donebefore;
 };
 
+struct TextureModel {
+    float positions[210];
+    unsigned int buffer;
+    unsigned int vao;
+    const char* vshader;
+    const char* fshader;
+    unsigned int shader;
+    unsigned short int donebefore;
+    unsigned int slot;
+    unsigned int texshader;
+    const char* texturepath;
+    GLint texture_min_filter;
+    GLint texture_mag_filter;
+    GLint texture_wrap_s;
+    GLint texture_wrap_t;
+    GLuint texture;
+};
+
+void drawTextureModel(struct TextureModel* item, glm::mat4 proj) {
+    if (item->donebefore == 0) {
+        floatbuffer(GL_ARRAY_BUFFER, 1, &item->buffer, item->positions, sizeof(item->positions));
+        vertexarray(1, &item->vao);
+        glBindBuffer(GL_ARRAY_BUFFER, item->buffer);
+        glEnableVertexAttribArray(0);
+        glEnableVertexAttribArray(1);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 5, (const void*)(sizeof(float) * 0));
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 5, (const void*)(sizeof(float) * 3));
+        item->texshader = createshader(item->vshader, item->fshader);
+        bindshader(item->texshader);
+
+        maketexture(item->texturepath, &item->texture, item->texture_mag_filter, item->texture_min_filter, item->texture_wrap_s, item->texture_wrap_t);
+
+        item->donebefore++;
+    }
+
+    bindshader(item->texshader);
+    bindtexture(item->slot, item->texture);
+    setuniform1i(item->texshader, "u_texture", item->slot);
+    setuniformmat4f(item->texshader, "u_MVP", proj);
+    glBindVertexArray(item->vao);
+    glDrawArrays(GL_TRIANGLES, 0, 42);
+}
+
 void drawBasicColourModel(struct BasicColourModel* item, glm::mat4 proj) {
     if (item->donebefore == 0) {
         floatbuffer(GL_ARRAY_BUFFER, 1, &item->buffer, item->positions, sizeof(item->positions));

@@ -61,8 +61,8 @@ int main(void) {
     };
 
     unsigned int indices[] = {
-        0, 1, 2,
-        2, 3, 0
+        1, 0, 2,
+        3, 2, 0
     };
 
     float aspect = (float)width / (float)height;
@@ -93,8 +93,8 @@ int main(void) {
     wall.texturepath = "../textures/cobble_stone.png";
     wall.slot = 0;
     wall.donebefore = 0;
-    wall.texture_mag_filter = GL_LINEAR;
-    wall.texture_min_filter = GL_LINEAR;
+    wall.texture_mag_filter = GL_NEAREST;
+    wall.texture_min_filter = GL_NEAREST;
     wall.texture_wrap_s = GL_REPEAT;
     wall.texture_wrap_t = GL_REPEAT;
     
@@ -140,9 +140,26 @@ int main(void) {
     glm::vec3 translation(200, 200, 0);
     glm::vec3 translation2(600, 200, 0);
     */
+
+    struct TextureModel TARDIS;
+    TARDIS.vshader = "../shaders/TARDISv.glsl";
+    TARDIS.fshader = "../shaders/texturefragment.glsl";
+    TARDIS.texturepath = "../textures/tardis_256x256.png";
+    TARDIS.slot = 2;
+    TARDIS.donebefore = 0;
+    TARDIS.texture_mag_filter = GL_LINEAR;
+    TARDIS.texture_min_filter = GL_LINEAR;
+    TARDIS.texture_wrap_s = GL_REPEAT;
+    TARDIS.texture_wrap_t = GL_REPEAT;
+
+    for (int i = 0; i < 210; i++) {
+        TARDIS.positions[i] = tardispositions2[i];
+
+    }
+
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
-    //glEnable(GL_CULL_FACE);
+    glEnable(GL_CULL_FACE);
     while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS && glfwWindowShouldClose(window) == 0) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -172,6 +189,7 @@ int main(void) {
         */
         drawBasicColourModel(&tardisblue , mvp);
         drawVertexColourModel(&tardis, mvp);
+        drawTextureModel(&TARDIS, mvp);
         //ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 
         //ImGui::Render();

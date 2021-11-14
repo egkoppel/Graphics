@@ -1,27 +1,86 @@
+    float tardispositions0[] = {
+        //vertices             
+        4.0f, -2.0f, -1.0f,   //0  bottom front left   
+        6.0f, -2.0f, -1.0f,   //1  bottom front right  
+        6.0f, -2.0f,  1.0f,   //2  bottom back  right  
+        4.0f, -2.0f,  1.0f,   //3  bottom back  left   
+        4.0f,  2.0f, -1.0f,   //4  top    front left   
+        6.0f,  2.0f, -1.0f,   //5  top    front right  
+        6.0f,  2.0f,  1.0f,   //6  top    back  right  
+        4.0f,  2.0f,  1.0f,   //7  top    back  left   
+        5.0f,  3.0f,  0.0f    //8  cone top            
+    };
+
     float tardispositions1[] = {
         //vertices              //vertex colours
         -1.0f, -2.0f, -1.0f,    0.583f,  0.771f,  0.014f, //0  bottom front left   
          1.0f, -2.0f, -1.0f,    0.609f,  0.115f,  0.436f, //1  bottom front right  
          1.0f, -2.0f,  1.0f,    0.327f,  0.483f,  0.844f, //2  bottom back  right  
         -1.0f, -2.0f,  1.0f,    0.822f,  0.569f,  0.201f, //3  bottom back  left   
-        -1.0f,  1.0f, -1.0f,    0.435f,  0.602f,  0.223f, //4  top    front left   
-         1.0f,  1.0f, -1.0f,    0.310f,  0.747f,  0.185f, //5  top    front right  
-         1.0f,  1.0f,  1.0f,    0.597f,  0.770f,  0.761f, //6  top    back  right  
-        -1.0f,  1.0f,  1.0f,    0.559f,  0.436f,  0.730f, //7  top    back  left   
-         0.0f,  2.0f,  0.0f,    0.359f,  0.583f,  0.152f  //8  cone top            
+        -1.0f,  2.0f, -1.0f,    0.435f,  0.602f,  0.223f, //4  top    front left   
+         1.0f,  2.0f, -1.0f,    0.310f,  0.747f,  0.185f, //5  top    front right  
+         1.0f,  2.0f,  1.0f,    0.597f,  0.770f,  0.761f, //6  top    back  right  
+        -1.0f,  2.0f,  1.0f,    0.559f,  0.436f,  0.730f, //7  top    back  left   
+         0.0f,  3.0f,  0.0f,    0.359f,  0.583f,  0.152f  //8  cone top            
     };
 
-    float tardispositions0[] = {
-        //vertices             
-         4.0f, -2.0f, -1.0f,   //0  bottom front left   
-         6.0f, -2.0f, -1.0f,   //1  bottom front right  
-         6.0f, -2.0f,  1.0f,   //2  bottom back  right  
-         4.0f, -2.0f,  1.0f,   //3  bottom back  left   
-         4.0f,  1.0f, -1.0f,   //4  top    front left   
-         6.0f,  1.0f, -1.0f,   //5  top    front right  
-         6.0f,  1.0f,  1.0f,   //6  top    back  right  
-         4.0f,  1.0f,  1.0f,   //7  top    back  left   
-         5.0f,  2.0f,  0.0f    //8  cone top            
+    float tardispositions2[] = {
+        //vertices              //texcoords
+        -6.0f, -2.0f, -1.0f,    0.5f, 0.5f,   //0  bottom front left   
+        -4.0f, -2.0f, -1.0f,    0.5f, 1.0f,   //1  bottom front right  
+        -4.0f, -2.0f,  1.0f,    1.0f, 1.0f,   //2  bottom back  right
+
+        -4.0f, -2.0f,  1.0f,    1.0f, 1.0f,   //2  bottom back  right   
+        -6.0f, -2.0f,  1.0f,    0.5f, 1.0f,   //3  bottom back  left  
+        -6.0f, -2.0f, -1.0f,    0.5f, 0.5f,   //0  bottom front left 
+
+        -4.0f, -2.0f, -1.0f,    0.5f, 0.0f,   //1  bottom front right
+        -6.0f, -2.0f, -1.0f,    0.0f, 0.0f,   //0  bottom front left
+        -6.0f,  2.0f, -1.0f,    0.0f, 1.0f,   //4  top    front left
+
+        -6.0f,  2.0f, -1.0f,    0.0f, 1.0f,   //4  top    front left   
+        -4.0f,  2.0f, -1.0f,    0.5f, 1.0f,   //5  top    front right
+        -4.0f, -2.0f, -1.0f,    0.5f, 0.0f,   //1  bottom front right
+
+        -6.0f, -2.0f,  1.0f,    0.5f, 0.0f,   //3  bottom back  left
+        -4.0f, -2.0f,  1.0f,    0.0f, 0.0f,   //2  bottom back  right
+        -4.0f,  2.0f,  1.0f,    0.0f, 1.0f,   //6  top    back  right
+
+        -4.0f,  2.0f,  1.0f,    0.0f, 1.0f,   //6  top    back  right  
+        -6.0f,  2.0f,  1.0f,    0.5f, 1.0f,   //7  top    back  left
+        -6.0f, -2.0f,  1.0f,    0.5f, 0.0f,   //3  bottom back  left 
+
+        -6.0f,  2.0f,  1.0f,    0.0f, 1.0f,   //7  top    back  left
+        -6.0f,  2.0f, -1.0f,    0.5f, 1.0f,   //4  top    front left 
+        -6.0f, -2.0f,  1.0f,    0.0f, 0.0f,   //3  bottom back  left   
+
+        -6.0f, -2.0f, -1.0f,    0.0f, 0.0f,   //0  bottom front left
+        -6.0f, -2.0f,  1.0f,    0.5f, 0.0f,   //3  bottom back  left
+        -6.0f,  2.0f, -1.0f,    0.0f, 1.0f,   //4  top    front left
+
+        -4.0f, -2.0f,  1.0f,    0.5f, 0.0f,   //2  bottom back  right
+        -4.0f, -2.0f, -1.0f,    0.0f, 0.0f,   //1  bottom front right
+        -4.0f,  2.0f, -1.0f,    0.0f, 1.0f,   //5  top    front right 
+
+        -4.0f,  2.0f, -1.0f,    0.0f, 1.0f,   //5  top    front right  
+        -4.0f,  2.0f,  1.0f,    0.5f, 1.0f,   //6  top    back  right
+        -4.0f, -2.0f,  1.0f,    0.5f, 0.0f,   //2  bottom back  right
+
+        -4.0f,  2.0f, -1.0f,    1.0f, 0.0f,   //5  top    front right
+        -6.0f,  2.0f, -1.0f,    0.5f, 0.0f,   //4  top    front left
+        -5.0f,  3.0f,  0.0f,    0.75f, 0.25f,   //8  cone top
+
+        -6.0f,  2.0f, -1.0f,    1.0f, 0.0f,   //4  top    front left
+        -6.0f,  2.0f,  1.0f,    0.5f, 0.0f,   //7  top    back  left   
+        -5.0f,  3.0f,  0.0f,    0.75f, 0.25f,   //8  cone top
+     
+        -6.0f,  2.0f,  1.0f,    1.0f, 0.0f,   //7  top    back  left
+        -4.0f,  2.0f,  1.0f,    0.5f, 0.0f,   //6  top    back  right
+        -5.0f,  3.0f,  0.0f,    0.75f, 0.25f,   //8  cone top
+
+        -4.0f,  2.0f,  1.0f,    1.0f, 0.0f,   //6  top    back  right
+        -4.0f,  2.0f, -1.0f,    0.5f, 0.0f,   //5  top    front right
+        -5.0f,  3.0f,  0.0f,    0.75f, 0.25f    //8  cone top          
     };
 
     unsigned int tardisindices[] = {
