@@ -93,8 +93,8 @@ int main(void) {
     wall.texturepath = "../textures/cobble_stone.png";
     wall.slot = 0;
     wall.donebefore = 0;
-    wall.texture_mag_filter = GL_NEAREST;
-    wall.texture_min_filter = GL_NEAREST;
+    wall.texture_mag_filter = GL_LINEAR;
+    wall.texture_min_filter = GL_LINEAR;
     wall.texture_wrap_s = GL_REPEAT;
     wall.texture_wrap_t = GL_REPEAT;
     
@@ -147,8 +147,8 @@ int main(void) {
     TARDIS.texturepath = "../textures/tardis_256x256.png";
     TARDIS.slot = 2;
     TARDIS.donebefore = 0;
-    TARDIS.texture_mag_filter = GL_LINEAR;
-    TARDIS.texture_min_filter = GL_LINEAR;
+    TARDIS.texture_mag_filter = GL_NEAREST;
+    TARDIS.texture_min_filter = GL_NEAREST;
     TARDIS.texture_wrap_s = GL_REPEAT;
     TARDIS.texture_wrap_t = GL_REPEAT;
 
