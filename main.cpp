@@ -25,6 +25,8 @@
 int main(void) {
 
     #include "tardis.c"
+
+    #include "object_declarations.c"
  
     int width =  800;
     int height = 500;
@@ -44,27 +46,7 @@ int main(void) {
     glfwPollEvents();
     glfwSetCursorPos(window, width / 2, height / 2);
     
-    float positions1[] = {
-         //positions          //tex coord   //vertex colours
-         1.0f,  1.0f, 10.0f,  0.0f, 0.0f,   1.0f, 0.0f, 0.0f,  //0 - Bottom-Left 
-         2.0f,  1.0f, 10.0f,  1.0f, 0.0f,   0.0f, 1.0f, 0.0f,  //1 - Bottom-Right
-         2.0f,  2.0f, 10.0f,  1.0f, 1.0f,   0.0f, 0.0f, 1.0f,  //2 - Top----Right
-         1.0f,  2.0f, 10.0f,  0.0f, 1.0f,   1.0f, 1.0f, 0.0f   //3 - Top----Left
-    };
-
-    float positions2[] = {
-        //positions          //tex coord   //vertex colours
-       -1.0f, -1.0f, 10.0f,  0.0f, 0.0f,   1.0f, 0.0f, 0.0f,  //0 - Bottom-Left 
-        1.0f, -1.0f, 10.0f,  1.0f, 0.0f,   0.0f, 1.0f, 0.0f,  //1 - Bottom-Right
-        1.0f,  1.0f, 10.0f,  1.0f, 1.0f,   0.0f, 0.0f, 1.0f,  //2 - Top----Right
-       -1.0f,  1.0f, 10.0f,  0.0f, 1.0f,   1.0f, 1.0f, 0.0f   //3 - Top----Left
-    };
-
-    unsigned int indices[] = {
-        1, 0, 2,
-        3, 2, 0
-    };
-
+    
     float aspect = (float)width / (float)height;
     glm::mat4 proj = glm::perspective(glm::radians(45.0f), aspect, 0.0f, 125.0f);
     glm::mat4 view = glm::lookAt(
@@ -76,60 +58,6 @@ int main(void) {
     glm::mat4 mvp = proj * view * model;
 
 
-    struct TextureQuad face;
-    face.vshader = "../shaders/projtexturevertex.glsl";
-    face.fshader = "../shaders/colourtexturefragment.glsl";
-    face.texturepath = "../textures/mii_face_512x512.png";
-    face.slot = 1;
-    face.donebefore = 0;
-    face.texture_mag_filter = GL_NEAREST;
-    face.texture_min_filter = GL_NEAREST;
-    face.texture_wrap_s = GL_REPEAT;
-    face.texture_wrap_t = GL_REPEAT;
-
-    struct TextureQuad wall;
-    wall.vshader = "../shaders/projtexturevertex.glsl";
-    wall.fshader = "../shaders/colourtexturefragment.glsl";
-    wall.texturepath = "../textures/cobble_stone.png";
-    wall.slot = 0;
-    wall.donebefore = 0;
-    wall.texture_mag_filter = GL_LINEAR;
-    wall.texture_min_filter = GL_LINEAR;
-    wall.texture_wrap_s = GL_REPEAT;
-    wall.texture_wrap_t = GL_REPEAT;
-    
-    for (int i = 0; i < 32; i++) {
-        face.positions[i] = positions1[i];
-        wall.positions[i] = positions2[i];
-    }
-    for (int i = 0; i < 6; i++) {
-        face.indices[i] = indices[i];
-        wall.indices[i] = indices[i];
-    }
-
-    struct TextureQuad stuff[] = {face, wall};
-
-    struct VertexColourModel tardis;
-    tardis.vshader = "../shaders/projcolourvertex.glsl";
-    tardis.fshader = "../shaders/projcolourfragment.glsl";
-    tardis.donebefore = 0;
-
-    struct BasicColourModel tardisblue;
-    tardisblue.vshader = "../shaders/projvertex.glsl";
-    tardisblue.fshader = "../shaders/bluefragment.glsl";
-    tardisblue.donebefore = 0;
-
-    for (int i = 0; i < 54; i++) {
-        tardis.positions[i] = tardispositions1[i];
-    }
-    for (int i = 0; i < 27; i++) {
-        tardisblue.positions[i] = tardispositions0[i];
-    }
-    for (int i = 0; i < 42; i++) {
-        tardis.indices[i] = tardisindices[i];
-        tardisblue.indices[i] = tardisindices[i];
-    }
-
     ImGui::CreateContext();
     ImGui_ImplGlfwGL3_Init(window, true);
     ImGui::StyleColorsDark();
@@ -140,22 +68,6 @@ int main(void) {
     glm::vec3 translation(200, 200, 0);
     glm::vec3 translation2(600, 200, 0);
     */
-
-    struct TextureModel TARDIS;
-    TARDIS.vshader = "../shaders/TARDISv.glsl";
-    TARDIS.fshader = "../shaders/texturefragment.glsl";
-    TARDIS.texturepath = "../textures/tardis_256x256.png";
-    TARDIS.slot = 2;
-    TARDIS.donebefore = 0;
-    TARDIS.texture_mag_filter = GL_NEAREST;
-    TARDIS.texture_min_filter = GL_NEAREST;
-    TARDIS.texture_wrap_s = GL_REPEAT;
-    TARDIS.texture_wrap_t = GL_REPEAT;
-
-    for (int i = 0; i < 210; i++) {
-        TARDIS.positions[i] = tardispositions2[i];
-
-    }
 
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
@@ -169,12 +81,15 @@ int main(void) {
         //ImGui_ImplGlfwGL3_NewFrame();
 
         //onimguirender();
-        computeMatricesFromInputs(window, width, height);
+        computeMatricesFromInputs(window, width, height, aspect, &man);
         glm::mat4 proj = getProjectionMatrix();
         glm::mat4 view = getViewMatrix();
         glm::mat4 model = glm::mat4(1.0);
         mvp = proj * view * model;
         drawStructArray(stuff, (sizeof(stuff)/sizeof(stuff[0])), mvp);
+        
+        stuff[3] = man;
+
         /*
         ImGui::SliderFloat3("Translation", &translation.x, 0.0f, (float)width);            // Edit 1 float using a slider from 0.0f to 1.0f
         model = glm::translate(glm::mat4(1.0f), translation);
@@ -196,6 +111,7 @@ int main(void) {
         //ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
         glfwSwapBuffers(window);
         glfwPollEvents();
+        //printf("%f\t", stuff[3].positions[0]);
     }
 
     ImGui_ImplGlfwGL3_Shutdown();

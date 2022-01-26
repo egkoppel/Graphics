@@ -12,9 +12,9 @@ glm::mat4 getProjectionMatrix(){
 
 
 // Initial position : on +Z
-glm::vec3 position = glm::vec3( 0, 0, 5 ); 
+glm::vec3 position = glm::vec3( 0, 2, -8 ); 
 // Initial horizontal angle : toward -Z
-float horizontalAngle = 3.14f;
+float horizontalAngle = 0.0f;
 // Initial vertical angle : none
 float verticalAngle = 0.0f;
 // Initial Field of View
@@ -25,7 +25,7 @@ float mouseSpeed = 0.005f;
 
 
 
-void computeMatricesFromInputs(GLFWwindow* window, int width, int height){
+void computeMatricesFromInputs(GLFWwindow* window, int width, int height, float aspect, struct TextureQuad* character){
 
 	// glfwGetTime is called only once, the first time this function is called
 	static double lastTime = glfwGetTime();
@@ -63,26 +63,42 @@ void computeMatricesFromInputs(GLFWwindow* window, int width, int height){
 	glm::vec3 up = glm::cross( right, direction );
 
 	// Move forward
-	if (glfwGetKey( window, GLFW_KEY_UP ) == GLFW_PRESS){
+	if (glfwGetKey( window, GLFW_KEY_W ) == GLFW_PRESS){
 		position += direction * deltaTime * speed;
+		character->positions[2]  += deltaTime * speed;
+		character->positions[10] += deltaTime * speed;
+		character->positions[18] += deltaTime * speed;
+		character->positions[26] += deltaTime * speed;
 	}
 	// Move backward
-	if (glfwGetKey( window, GLFW_KEY_DOWN ) == GLFW_PRESS){
+	if (glfwGetKey( window, GLFW_KEY_S ) == GLFW_PRESS){
 		position -= direction * deltaTime * speed;
+		character->positions[2]  -= deltaTime * speed;
+		character->positions[10] -= deltaTime * speed;
+		character->positions[18] -= deltaTime * speed;
+		character->positions[26] -= deltaTime * speed;
 	}
 	// Strafe right
-	if (glfwGetKey( window, GLFW_KEY_RIGHT ) == GLFW_PRESS){
+	if (glfwGetKey( window, GLFW_KEY_D ) == GLFW_PRESS){
 		position += right * deltaTime * speed;
+		character->positions[0]  -= deltaTime * speed;
+		character->positions[8]  -= deltaTime * speed;
+		character->positions[16] -= deltaTime * speed;
+		character->positions[24] -= deltaTime * speed;
 	}
 	// Strafe left
-	if (glfwGetKey( window, GLFW_KEY_LEFT ) == GLFW_PRESS){
+	if (glfwGetKey( window, GLFW_KEY_A ) == GLFW_PRESS){
 		position -= right * deltaTime * speed;
+		character->positions[0]  += deltaTime * speed;
+		character->positions[8]  += deltaTime * speed;
+		character->positions[16] += deltaTime * speed;
+		character->positions[24] += deltaTime * speed;
 	}
 
 	float FoV = initialFoV;// - 5 * glfwGetMouseWheel(); // Now GLFW 3 requires setting up a callback for this. It's a bit too complicated for this beginner's tutorial, so it's disabled instead.
 
 	// Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
-	ProjectionMatrix = glm::perspective(glm::radians(FoV), 4.0f / 3.0f, 0.1f, 100.0f);
+	ProjectionMatrix = glm::perspective(glm::radians(FoV), aspect, 0.1f, 100.0f);
 	// Camera matrix
 	ViewMatrix       = glm::lookAt(
 								position,           // Camera is here
