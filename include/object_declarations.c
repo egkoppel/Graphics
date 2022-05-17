@@ -1,3 +1,5 @@
+#include "shader_config.h"
+
 #ifdef _cplusplus
 extern "C" {
 #endif
@@ -41,9 +43,9 @@ unsigned int indices[] = {
 };
 
 struct TextureQuad face;
-face.vshader = "../shaders/projtexturevertex.glsl";
-face.fshader = "../shaders/colourtexturefragment.glsl";
-face.texturepath = "../textures/mii_face_512x512.png";
+face.vshader = PROJECTION_TEXTURE_VERTEX_SHADER_PATH;
+face.fshader = COLOUR_TEXUTURE_FRAG_SHADER;
+face.texturepath = TEXTURE_MII_FACE;
 face.slot = 1;
 face.donebefore = 0;
 face.texture_mag_filter = GL_NEAREST;
@@ -52,9 +54,9 @@ face.texture_wrap_s = GL_REPEAT;
 face.texture_wrap_t = GL_REPEAT;
 
 struct TextureQuad wall;
-wall.vshader = "../shaders/projtexturevertex.glsl";
-wall.fshader = "../shaders/colourtexturefragment.glsl";
-wall.texturepath = "../textures/cobble_stone.png";
+wall.vshader = PROJECTION_TEXTURE_VERTEX_SHADER_PATH;
+wall.fshader = COLOUR_TEXUTURE_FRAG_SHADER;
+wall.texturepath = TEXTURE_COBBLESTONE;
 wall.slot = 0;
 wall.donebefore = 0;
 wall.texture_mag_filter = GL_LINEAR;
@@ -73,13 +75,13 @@ for (int i = 0; i < 6; i++) {
 
 
 struct VertexColourModel tardis;
-tardis.vshader = "../shaders/projcolourvertex.glsl";
-tardis.fshader = "../shaders/projcolourfragment.glsl";
+tardis.vshader = PROJECTION_COLOUR_VERTEX;
+tardis.fshader = PROJECTION_COLOUR_FRAGMENT;
 tardis.donebefore = 0;
 
 struct BasicColourModel tardisblue;
-tardisblue.vshader = "../shaders/projvertex.glsl";
-tardisblue.fshader = "../shaders/bluefragment.glsl";
+tardisblue.vshader = PROJECTION_VERTEX;
+tardisblue.fshader = BLUE_FRAG;
 tardisblue.donebefore = 0;
 
 for (int i = 0; i < 54; i++) {
@@ -94,9 +96,9 @@ for (int i = 0; i < 42; i++) {
 }
 
 struct TextureModel TARDIS;
-TARDIS.vshader = "../shaders/TARDISv.glsl";
-TARDIS.fshader = "../shaders/texturefragment.glsl";
-TARDIS.texturepath = "../textures/tardis_256x256.png";
+TARDIS.vshader = TARDIS_VERTEX_SHADER;
+TARDIS.fshader = TEXTURE_FRAG_SHADER;
+TARDIS.texturepath = TEXTURE_TARDIS;
 TARDIS.slot = 2;
 TARDIS.donebefore = 0;
 TARDIS.texture_mag_filter = GL_NEAREST;
@@ -110,9 +112,9 @@ for (int i = 0; i < 210; i++) {
 }
 
 struct TextureQuad floor;
-floor.vshader = "../shaders/projtexturevertex.glsl";
-floor.fshader = "../shaders/colourtexturefragment.glsl";
-floor.texturepath = "../textures/cobble_stone.png";
+floor.vshader = PROJECTION_TEXTURE_VERTEX_SHADER_PATH;
+floor.fshader = COLOUR_TEXUTURE_FRAG_SHADER;
+floor.texturepath = TEXTURE_COBBLESTONE;
 floor.slot = 2;
 floor.donebefore = 0;
 floor.texture_mag_filter = GL_LINEAR;
@@ -129,9 +131,9 @@ for (int i = 0; i < 6; i++) {
 }
 
 struct TextureQuad man;
-man.vshader = "../shaders/projtexturevertex.glsl";
-man.fshader = "../shaders/colourtexturefragment.glsl";
-man.texturepath = "../textures/man.png";
+man.vshader = PROJECTION_TEXTURE_VERTEX_SHADER_PATH;
+man.fshader = COLOUR_TEXUTURE_FRAG_SHADER;
+man.texturepath = TEXTURE_MAN;
 man.slot = 2;
 man.donebefore = 0;
 man.texture_mag_filter = GL_LINEAR;
