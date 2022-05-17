@@ -12,21 +12,21 @@
 #include <imgui/imgui.h>
 #include <imgui/imgui_impl_glfw_gl3.h>
 
-#include "startup.c"
-#include "buffer.c"
-#include "shader.c"
-#include "texture.c"
-#include "draw.c"
+#include "include/startup.c"
+#include "include/buffer.c"
+#include "include/shader.c"
+#include "include/texture.c"
+#include "include/draw.c"
 
-#include "controls.cpp"
+#include "include/controls.cpp"
 //#include "testclearcolor.c"
-#include "test.c"
+#include "include/test.c"
 
 int main(void) {
 
-    #include "tardis.c"
+    #include "include/tardis.c"
 
-    #include "object_declarations.c"
+    #include "include/object_declarations.c"
  
     int width =  800;
     int height = 500;
