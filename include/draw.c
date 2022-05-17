@@ -1,3 +1,7 @@
+#ifdef _cplusplus
+extern "C" {
+#endif
+
 void draw(unsigned int shader, unsigned int vao, unsigned int ibo, GLenum mode, GLsizei count, GLenum type, const void *indices){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     bindshader(shader);
@@ -178,3 +182,7 @@ void deleteshadertexture(struct TextureQuad items[], unsigned int length) {
         deletetexture(&items[i].texture);
     }
 }
+
+#ifdef _cplusplus
+}
+#endif

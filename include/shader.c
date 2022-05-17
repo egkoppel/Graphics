@@ -1,3 +1,7 @@
+#ifdef _cplusplus
+extern "C" {
+#endif
+
 static unsigned int compileshader(const char* source, unsigned int type) {
     unsigned int id = glCreateShader(type);
     glShaderSource(id, 1, &source, NULL);
@@ -93,3 +97,7 @@ void setuniform1i(unsigned int shader, const char* uniformname, int i0) {
 void setuniformmat4f(unsigned int shader, const char* uniformname, glm::mat4& matrix) {
     glUniformMatrix4fv(getuniformlocation(shader, uniformname), 1, GL_FALSE, &matrix[0][0]);
 }
+
+#ifdef _cplusplus
+}
+#endif

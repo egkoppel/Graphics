@@ -1,5 +1,9 @@
 //Perhaps tidy it up to reflect the fact that I seldom declare multiple buffers in a single line.
 
+#ifdef _cplusplus
+extern "C" {
+#endif
+
 void floatbuffer(GLenum buffer_type, GLsizei size, unsigned int* buffer, float data[], unsigned int datasize) {
     glGenBuffers(size, buffer);
     for (int i = 0; i < size; ++i) {
@@ -43,3 +47,7 @@ void unbindvao(void) {
     glGenVertexArrays(1, &vao);
     glBindVertexArray(vao);    
 */
+
+#ifdef _cplusplus
+}
+#endif

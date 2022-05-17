@@ -1,3 +1,7 @@
+#ifdef _cplusplus
+extern "C" {
+#endif
+
 GLFWwindow* startup(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share, int swapinterval, float red, float green, float blue, float alpha) {
 
     GLFWwindow* window;
@@ -40,3 +44,7 @@ GLFWwindow* startup(int width, int height, const char* title, GLFWmonitor* monit
 
     return window;
 }
+
+#ifdef _cplusplus
+}
+#endif

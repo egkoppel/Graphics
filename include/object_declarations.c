@@ -1,3 +1,7 @@
+#ifdef _cplusplus
+extern "C" {
+#endif
+
 float positions1[] = {
     //positions          //tex coord   //vertex colours
     1.0f,  1.0f, 10.0f,  0.0f, 0.0f,   1.0f, 0.0f, 0.0f,  //0 - Bottom-Left 
@@ -145,3 +149,7 @@ for (int i = 0; i < 6; i++) {
 
 
 struct TextureQuad stuff[] = { face, wall, floor, man };
+
+#ifdef _cplusplus
+}
+#endif

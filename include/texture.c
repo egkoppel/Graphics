@@ -1,3 +1,7 @@
+#ifdef _cplusplus
+extern "C" {
+#endif
+
 void maketexture(const char* imagefile, GLuint *texture, GLint texture_mag_filter, GLint texture_min_filter, GLint texture_wrap_s, GLint texture_wrap_t) {
 	int width, height, bpp;
 	stbi_set_flip_vertically_on_load(1);
@@ -34,3 +38,7 @@ void unbindtexture(void) {
 void deletetexture(const GLuint* texture) {
 	glDeleteTextures(1, texture);
 }
+
+#ifdef _cplusplus
+}
+#endif

@@ -1,3 +1,7 @@
+#ifdef _cplusplus
+extern "C" {
+#endif
+
 void oninit(){}
 void ondest(){}
 float clearcolor[4] = { 0.0f, 0.3f, 0.2f, 0.0f };
@@ -11,3 +15,7 @@ void onrender() {
 void onimguirender() {
 	ImGui::ColorEdit4("Clear Colour", clearcolor);
 }
+
+#ifdef _cplusplus
+}
+#endif

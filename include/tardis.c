@@ -1,3 +1,7 @@
+#ifdef _cplusplus
+extern "C" {
+#endif
+
     float tardispositions0[] = {
         //vertices             
         4.0f,  0.0f, -1.0f,   //0  bottom front left   
@@ -99,3 +103,7 @@
         7, 6, 8, //top back
         6, 5, 8  //top right
     };
+
+#ifdef _cplusplus
+}
+#endif
